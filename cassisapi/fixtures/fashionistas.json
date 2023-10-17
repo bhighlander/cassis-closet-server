@@ -1,0 +1,7 @@
+[{
+    "model": "cassisapi.fashionistas",
+    "pk": 1,
+    "fields": {
+        "user": 1
+    }
+}]

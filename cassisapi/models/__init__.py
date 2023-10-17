@@ -1,0 +1,1 @@
+from .fashionista import Fashionista
