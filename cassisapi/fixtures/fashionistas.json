@@ -1,5 +1,5 @@
 [{
-    "model": "cassisapi.fashionistas",
+    "model": "cassisapi.fashionista",
     "pk": 1,
     "fields": {
         "user": 1
