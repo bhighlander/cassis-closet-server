@@ -1,0 +1,82 @@
+[
+    {
+        "model": "cassisapi.color",
+        "pk": 1,
+        "fields": {
+            "label": "red",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.color",
+        "pk": 2,
+        "fields": {
+            "label": "blue",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.color",
+        "pk": 3,
+        "fields": {
+            "label": "green",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.color",
+        "pk": 4,
+        "fields": {
+            "label": "yellow",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.color",
+        "pk": 5,
+        "fields": {
+            "label": "orange",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.color",
+        "pk": 6,
+        "fields": {
+            "label": "purple",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.color",
+        "pk": 7,
+        "fields": {
+            "label": "pink",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.color",
+        "pk": 8,
+        "fields": {
+            "label": "brown",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.color",
+        "pk": 9,
+        "fields": {
+            "label": "black",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.color",
+        "pk": 10,
+        "fields": {
+            "label": "white",
+            "owner": 1
+        }
+    }
+]

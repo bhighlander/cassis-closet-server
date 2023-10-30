@@ -19,10 +19,12 @@ from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
 from cassisapi.views.auth import login_user, register_user
+from cassisapi.views.article_view import ArticleView
 from django.conf import settings
 from django.conf.urls.static import static
 
 router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'articles', ArticleView, 'article')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
