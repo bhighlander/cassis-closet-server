@@ -4,10 +4,10 @@
         "pk": 1,
         "fields": {
             "color": 1,
-            "season:": "Spring",
+            "season": 1,
             "type": 1,
             "owner": 1,
-            "image": "http://www.cassisapi.com/media/1.jpg"
+            "image": ""
         }
 }
 ]

@@ -1,0 +1,26 @@
+[
+    {
+        "model": "cassisapi.type",
+        "pk": 1,
+        "fields": {
+            "label": "skirt",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.type",
+        "pk": 2,
+        "fields": {
+            "label": "dress",
+            "owner": 1
+        }
+    },
+    {
+        "model": "cassisapi.type",
+        "pk": 3,
+        "fields": {
+            "label": "top",
+            "owner": 1
+        }
+    }
+]
