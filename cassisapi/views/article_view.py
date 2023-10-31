@@ -7,13 +7,13 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 
 class ArticleView(ViewSet):
+    parser_classes = (MultiPartParser, FormParser)
     def create (self, request):
         """Handle POST operations for articles
         Returns:
             Response -- JSON serialized article instance
         """
 
-        parser_classes = (MultiPartParser, FormParser)
         new_article = Article()
         new_article.color = Color.objects.get(pk=request.data["color"])
         new_article.season = Season.objects.get(pk=request.data["season"])
@@ -27,8 +27,15 @@ class ArticleView(ViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
+
+# class FashionistaSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Fashionista
+#         fields = ('id', 'username',)
+#         depth = 1
 class ArticleSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
+    # owner = FashionistaSerializer(many=False)
     class Meta:
         model = Article
         fields = ('id', 'color', 'season', 'type', 'owner', 'image')
