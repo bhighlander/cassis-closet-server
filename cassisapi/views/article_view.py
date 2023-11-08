@@ -27,7 +27,16 @@ class ArticleView(ViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
-
+    def list(self, request):
+        """Handle GET requests to articles resource
+        Returns:
+            Response -- JSON serialized list of articles
+        """
+        articles = Article.objects.all()
+        serializer = ArticleSerializer(
+            articles, many=True, context={'request': request})
+        return Response(serializer.data)
+    
 # class FashionistaSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Fashionista
