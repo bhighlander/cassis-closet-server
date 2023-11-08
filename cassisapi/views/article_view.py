@@ -2,9 +2,9 @@
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
-from cassisapi.models import Article, Color, Season, Type, Fashionista
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
+from cassisapi.models import Article, Color, Type, Fashionista
 
 class ArticleView(ViewSet):
     parser_classes = (MultiPartParser, FormParser)
@@ -16,7 +16,7 @@ class ArticleView(ViewSet):
 
         new_article = Article()
         new_article.color = Color.objects.get(pk=request.data["color"])
-        new_article.season = Season.objects.get(pk=request.data["season"])
+        new_article.season = request.data["season"]
         new_article.type = Type.objects.get(pk=request.data["type"])
         new_article.owner = Fashionista.objects.get(user=request.auth.user)
         new_article.image = request.data["image"]
