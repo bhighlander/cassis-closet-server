@@ -16,7 +16,8 @@ class TypeView(ViewSet):
         """
 
         try:
-            clothing_type = Type.objects.order_by(Lower('label'))
+            fashionista = Fashionista.objects.get(user=request.auth.user)
+            clothing_type= Type.objects.order_by(Lower('label')).filter(owner=fashionista)
             serializer = TypeSerializer(clothing_type, many=True, context={'request': request})
             return Response(serializer.data)
         except Exception as ex:

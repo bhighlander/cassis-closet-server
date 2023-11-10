@@ -8,3 +8,4 @@ class Article(models.Model):
     type = models.ForeignKey("Type", on_delete=models.CASCADE)
     owner = models.ForeignKey("Fashionista", on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
+    last_edited = models.DateTimeField(auto_now=True)

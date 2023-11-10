@@ -16,7 +16,8 @@ class ColorView(ViewSet):
         """
 
         try:
-            color = Color.objects.order_by(Lower('label'))
+            fashionista = Fashionista.objects.get(user=request.auth.user)
+            color = Color.objects.order_by(Lower('label')).filter(owner=fashionista)
             serializer = ColorSerializer(color, many=True, context={'request': request})
             return Response(serializer.data)
         except Exception as ex:
