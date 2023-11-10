@@ -1,4 +1,5 @@
 """View for clothing articles."""
+from datetime import datetime
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
@@ -20,6 +21,7 @@ class ArticleView(ViewSet):
         new_article.type = Type.objects.get(pk=request.data["type"])
         new_article.owner = Fashionista.objects.get(user=request.auth.user)
         new_article.image = request.data["image"]
+        new_article.last_edited = datetime.now()
 
         new_article.save()
 
@@ -32,20 +34,21 @@ class ArticleView(ViewSet):
         Returns:
             Response -- JSON serialized list of articles
         """
-        articles = Article.objects.all()
-        serializer = ArticleSerializer(
-            articles, many=True, context={'request': request})
-        return Response(serializer.data)
-    
-# class FashionistaSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Fashionista
-#         fields = ('id', 'username',)
-#         depth = 1
+        try:
+            articles = Article.objects.order_by('-last_edited')
+            fashionista = Fashionista.objects.get(user=request.auth.user)
+            articles = articles.filter(owner=fashionista)
+            serializer = ArticleSerializer(articles, many=True, context={'request': request})
+            return Response(serializer.data)
+
+        except Article.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+
 class ArticleSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
     # owner = FashionistaSerializer(many=False)
     class Meta:
         model = Article
-        fields = ('id', 'color', 'season', 'type', 'owner', 'image')
+        fields = ('id', 'color', 'season', 'type', 'owner', 'image', 'last_edited')
         depth = 1
