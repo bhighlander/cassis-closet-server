@@ -43,6 +43,18 @@ class ArticleView(ViewSet):
 
         except Article.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+        
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single article
+        Returns:
+            Response -- JSON serialized article instance
+        """
+        try:
+            article = Article.objects.get(pk=pk)
+            serializer = ArticleSerializer(article, context={'request': request})
+            return Response(serializer.data)
+        except Article.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
 
 class ArticleSerializer(serializers.ModelSerializer):
