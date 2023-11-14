@@ -56,6 +56,19 @@ class ArticleView(ViewSet):
         except Article.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
+    def destroy(self, request, pk=None):
+        """Handle DELETE requests for a single article
+        Returns:
+            Response -- 200, 404, or 500 status code
+        """
+        try:
+            article = Article.objects.get(pk=pk)
+            article.delete()
+
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        except Article.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
 class ArticleSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
