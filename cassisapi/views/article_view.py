@@ -79,8 +79,9 @@ class ArticleView(ViewSet):
         article.color = Color.objects.get(pk=request.data["color"])
         article.season = request.data["season"]
         article.type = Type.objects.get(pk=request.data["type"])
-        article.image = request.data["image"]
         article.last_edited = datetime.now()
+        if 'image' in request.FILES and request.data["image"] != None:
+            article.image = request.FILES["image"]
 
         article.save()
 
