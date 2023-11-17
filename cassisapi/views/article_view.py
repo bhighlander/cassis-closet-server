@@ -69,10 +69,26 @@ class ArticleView(ViewSet):
 
         except Article.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+        
+    def update(self, request, pk=None):
+        """Handle PUT requests for an article
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        article = Article.objects.get(pk=pk)
+        article.color = Color.objects.get(pk=request.data["color"])
+        article.season = request.data["season"]
+        article.type = Type.objects.get(pk=request.data["type"])
+        article.last_edited = datetime.now()
+        if 'image' in request.FILES and request.data["image"] != None:
+            article.image = request.FILES["image"]
+
+        article.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
 
 class ArticleSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
-    # owner = FashionistaSerializer(many=False)
     class Meta:
         model = Article
         fields = ('id', 'color', 'season', 'type', 'owner', 'image', 'last_edited')
