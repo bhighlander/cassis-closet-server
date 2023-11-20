@@ -22,6 +22,7 @@ from cassisapi.views.auth import login_user, register_user
 from cassisapi.views.article_view import ArticleView
 from cassisapi.views.color_view import ColorView
 from cassisapi.views.type_view import TypeView
+from cassisapi.views.outfit_view import OutfitView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -29,6 +30,7 @@ router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'articles', ArticleView, 'article')
 router.register(r'colors', ColorView, 'color')
 router.register(r'types', TypeView, 'type')
+router.register(r'outfits', OutfitView, 'outfit')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

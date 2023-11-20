@@ -1,0 +1,12 @@
+[
+    {
+        "model": "cassisapi.outfit",
+        "pk": 1,
+        "fields": {
+            "owner": 1,
+            "color": 1,
+            "season": "Summer",
+            "last_edited": "2019-04-01T00:00:00Z"
+        }
+    }
+]
