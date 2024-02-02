@@ -49,12 +49,36 @@ class OutfitView(ViewSet):
         except Exception as ex:
             return Response({'message': ex.args[0]})
         
+    def destroy(self, request, pk=None):
+        """Handle DELETE requests for a single outfit
+        Returns:
+            Response -- 200, 404, or 500 status code
+        """
+        try:
+            outfit = Outfit.objects.get(pk=pk)
+            outfit.delete()
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+        except Outfit.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class OutfitArticleSerializer(serializers.ModelSerializer):
+    """JSON serializer for articles on outfits
+    Arguments:
+        serializer type
+    """
+    class Meta:
+        model = Article
+        fields = ('id', 'image')
+
 class OutfitSerializer(serializers.ModelSerializer):
     """JSON serializer for outfits
     Arguments:
         serializer type
     """
     class Meta:
+        articles = OutfitArticleSerializer(many=True)
         model = Outfit
         fields = ('id', 'owner', 'color', 'season', 'articles', 'last_edited')
         depth = 1
